@@ -66,6 +66,10 @@
    </section>
    <div id="contact-container">
     <?php
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        
         // Initialize variables
         $name = $email = $subject = $message = ""; 
 
@@ -78,10 +82,10 @@
             $message = test_input($_POST["message"] ?? 'no message');
 
             // Email setup
-            $to = 'your_email@example.com';
-            $headers = "From: webmaster@example.com" . "\r\n" .
-                       "Reply-To: $email" . "\r\n" .
-                       "X-Mailer: PHP/" . phpversion();
+            $to = 'alviolai@kean.edu';
+            // $headers = "From: apache@obi2.kean.edu" . "\r\n" .
+            //            "Reply-To: $email" . "\r\n" .
+            //            "X-Mailer: PHP/" . phpversion();
 
             // Construct email body
             $body = "You have received a new message from your website contact form.\n\n";
@@ -92,13 +96,13 @@
 
             // Validate email and send
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                if(mail($to, $subject, $body, $headers)) {
-                    echo "<div id='message' style='color: green;'>Email Sent. Thank You!</div>";
+                if(mail($to, $subject, $body)) {
+                    echo "<div id='message' style='color: green; text-align: center;'>Email Sent. Thank You!</div>";
                 } else {
-                    echo "<div id='message' style='color: red;'>Email did not go through. Try again later.</div>";
+                    echo "<div id='message' style='color: red; text-align: center;'>Email did not go through. Try again later.</div>";
                 }
             } else {
-                echo "<div id='message' style='color: red;'>Invalid Email Address.</div>";
+                echo "<div id='message' style='color: red; text-align: center;'>Invalid Email Address.</div>";
             }
         }
 
